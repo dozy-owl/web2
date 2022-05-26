@@ -1,0 +1,10 @@
+﻿
+{% extends "base.html" %}
+
+{% block content %}
+    	    {% for item in range(n) %}
+            <h4 class="navbar navbar-dark" style="background-color: #6bdb6b;">{{titles[item]}}</h4>
+	    <p>{{texts[item]}}</p>
+	    <p>{{dates[item]}}</p>
+            {% endfor %}
+{% endblock %}

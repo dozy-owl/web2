@@ -1,0 +1,39 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<h1>Записи в блоге</h1>
+{% if current_user.is_authenticated %}
+    <a href="news" class="btn btn-secondary">Добавить новость</a>
+{% endif %}
+</br>
+{% for item in news%}
+</br>
+<div class="col-md6 border rounded">
+    <h2>{{item.title}}</h2>
+    <div>
+        {{item.content}}
+    </div>
+    <div>
+        Автор - {{item.user.name}}, Дата написания - {{item.created_date}}
+    </div>
+</br>
+{% if current_user.is_authenticated and current_user == item.user %}
+    <div>
+        <a href="/news/{{ item.id }}" class="btn" style="background-color: #fffa9e;">
+            Изменить
+        </a>
+        <a href="/news_delete/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+{% endif %}
+{% if current_user.is_authenticated %}
+	<a href="/answers/{{ item.id }}" class="btn btn-outline-success"> 
+	    Перейти к обсуждению
+	</a>
+    </div>
+
+{% endif %}
+</div>
+{% endfor %}
+</br>
+{% endblock %}

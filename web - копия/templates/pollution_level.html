@@ -1,0 +1,59 @@
+﻿
+{% extends "base.html" %}
+
+{% block content %}
+</br>
+<div class="container">
+   
+<form class="form-inline" method="POST">
+    <input type="text" name="country"/>
+    <pre><p> </p></pre>
+    <button type="submit" class="btn btn-success">Найти</button>
+</form>
+<div class="row">
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+<form class="w-50">
+<div readonly class="form-group mb-2">
+    <textarea readonly class="form-control" id="exampleFormControlTextarea1" 
+	rows="1">{{answer}}</textarea>
+</div>
+</form>
+</div>      <!-- ЗДЕСЬ ЗАКОНЧИЛСЯ COL-... -->
+</div>      <!-- ЗДЕСЬ ROW -->
+<p><b>По убыванию</b></p>
+<div class="row">
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+<table border="1">
+<tr><td>№</td><td align="center">Страна</td><td>Значение индекса</td><td>Количество людей</td></tr>
+{% for country in table%}
+   <tr>
+	{% for elem in country %}
+	<td align="center">
+	    <pre>{{ elem }}</pre>
+	</td>
+	{% endfor %}
+   </tr>
+{% endfor %}
+</table>
+</br>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+<p align="justify">Единица измерения: мкг/м³
+	Массовая, или гравиметрическая концентрация – это масса частиц, содержащихся 
+	в единице объёма воздуха. В международной практике чаще всего используется 
+	единица массовой концентрации мг/м3. При очень низких концентрациях может 
+	использоваться также мкг/м3 (мкг/м3, 10-3 мг/м3) и нанограмм на кубический 
+	метр (нг/м3).
+	Для оценки экологического воздействия на окружающую среду тех или иных 
+	источников выбросов содержание атмосферной пыли и аэрозолей также определяют 
+	по выпадению на подстилающую поверхность и измеряют в единицах массы на 
+	единицу площади. Индекс:</br>
+	⩾ 58.80 - Вредно</p>
+	⩾ 37.90 - Вредно для уязвимых групп</p>
+	⩾ 13.00 - Средне</br>
+	⩾ 3.50 - Хорошо</p>
+</div>
+</div>
+</div>
+</br>
+{% endblock %}

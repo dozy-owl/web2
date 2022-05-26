@@ -1,0 +1,66 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<h1>Обсуждение</h1>
+<div>
+    <a href="/public" class="btn btn-outline-secondary">
+        Вернуться к обсуждениям
+    </a>
+</div>
+</br>
+<div class="col-md6 border rounded">
+    <h2>{{news_title}}</h2>
+    <div>
+        {{news_content}}
+    </div>
+    <div>
+        Автор - {{news_name}}, Дата написания - {{news_date}}
+    </div>
+</div>
+{% for item in answers%}
+</br>
+<div class="col-md6 border rounded">
+    <h2>{{item.title}}</h2>
+    <div>
+        {{item.content}}
+    </div>
+    <div>
+        Автор - {{item.user.name}}, Дата написания - {{item.created_date}}
+    </div>
+</br>
+{% if current_user.is_authenticated and current_user == item.user %}
+    <div>
+        <a href="/answer/{{ item.id }}" class="btn" style="background-color: #fffa9e;">
+            Изменить
+        </a>
+        <a href="/answers_delete/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+{% endif %}
+    </div>
+</div>
+{% endfor %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}<br>
+        {% for error in form.title.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.content.label }}<br>
+        {{ form.content(class="form-control") }}<br>
+        {% for error in form.content.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+{% endblock %}
